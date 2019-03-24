@@ -19,8 +19,6 @@ socket.on('listening', () => {
     console.log(`UDP socket listening on ${address.address}:${address.port}`);
 });
 
-let numRuns = 0;
-
 socket.on('message', (message, rinfo) => {
     console.log(`Message from: ${rinfo.address}:${rinfo.port}`);
     console.log(`Message length: ${message.length}`);
@@ -38,12 +36,6 @@ socket.on('message', (message, rinfo) => {
             }
             num++;
         }
-    } catch (err) {
-        //console.log('done');
-        //console.log(err);
-    }
-    numRuns++;
-    if (numRuns === 2) {
-        console.log(values);
-    }
+    } catch (err) {}
+    console.log(values);
 });
