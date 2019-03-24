@@ -5,6 +5,12 @@ const PORT = 42055;
 const MULTICAST_ADDR = '237.7.7.7';
 
 const helpers = require('./helpers');
+const dataStructs = require('./data-structs');
+
+const Quaternion = dataStructs.Quaternion;
+const Position = dataStructs.Position;
+const SystemState = dataStructs.SystemState;
+const TotalState = dataStructs.TotalState;
 
 const socket = dgram.createSocket({
     type: 'udp4',
@@ -19,11 +25,13 @@ socket.on('listening', () => {
     console.log(`UDP socket listening on ${address.address}:${address.port}`);
 });
 
+let states = [];
+
 socket.on('message', (message, rinfo) => {
-    console.log(`Message from: ${rinfo.address}:${rinfo.port}`);
-    console.log(`Message length: ${message.length}`);
+    console.log('Recieved data');
     let values = [];
     let currOffset = 0;
+    // read until error (exceeds bounds)
     try {
         let num = 0;
         while (true) {
@@ -37,5 +45,7 @@ socket.on('message', (message, rinfo) => {
             num++;
         }
     } catch (err) {}
-    console.log(values);
+    let state = new TotalState(values);
+    states.push(state);
+    console.log(JSON.stringify(state));
 });
