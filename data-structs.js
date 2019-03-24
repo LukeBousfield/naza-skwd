@@ -9,17 +9,24 @@ class Quaternion {
         this.c = c;
         this.d = d;
     }
+    describe() {
+        return `(${this.a}, ${this.b}, ${this.c}, ${this.d})`;
+    }
 }
 
-// position class for keeping track of (x, y, z) coordinates
+// position class for keeping track of (altitude, latitude, longitude) coordinates
 class Position {
     constructor(altitude, latitude, longitude) {
         this.altitude = altitude;
         this.latitude = latitude;
         this.longitude = longitude;
     }
+    describe() {
+        return `Altitude ${this.altitude}, latitude ${this.latitude}, longitude ${this.longitude}`
+    }
 }
 
+// keeps track of the state of an individual system (e.g. booster)
 class SystemState {
     constructor(name, position, rotation) {
         this.name = name;
@@ -28,7 +35,7 @@ class SystemState {
     }
 }
 
-// keeps track of total state
+// keeps track of the state of the entire rocket
 class TotalState {
 
     constructor(arr) {
@@ -62,6 +69,22 @@ class TotalState {
         this.engineFlag = arr[arr.length - 2];
         this.reserved = arr[arr.length - 1];
 
+    }
+
+    describe() {
+        let str = '';
+        for (let systemState of this.systemStates) {
+            str += systemState.name + ' System';
+            str += '\n';
+            str += `    Position: ${systemState.position.describe()}`;
+            str += '\n';
+            str += `    Rotation: Quaternion${systemState.rotation.describe()}`;
+            str += '\n';
+        }
+        str += `Engine flag: ${this.engineFlag}`;
+        str += '\n';
+        str += `Reserved: ${this.reserved}`;
+        return str;
     }
 
 }

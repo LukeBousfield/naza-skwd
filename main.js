@@ -28,7 +28,7 @@ socket.on('listening', () => {
 let states = [];
 
 socket.on('message', (message, rinfo) => {
-    console.log('Recieved data');
+    console.log('_______________________________________________________________________________________________________________________________________');
     let values = [];
     let currOffset = 0;
     // read until error (exceeds bounds)
@@ -47,5 +47,5 @@ socket.on('message', (message, rinfo) => {
     } catch (err) {}
     let state = new TotalState(values);
     states.push(state);
-    console.log(JSON.stringify(state));
+    console.log(state.describe());
 });
