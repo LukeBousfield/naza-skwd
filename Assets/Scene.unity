@@ -288,7 +288,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 527122657}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: -633.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -310,7 +310,7 @@ MonoBehaviour:
   MCAddress: 237.7.7.7
   CMSystemGameObject: {fileID: 0}
   LASSystemGameObject: {fileID: 0}
-  BoosterSystemGameObject: {fileID: 0}
+  BoosterSystemGameObject: {fileID: 1505816566}
   StateText: {fileID: 1681671356}
 --- !u!1 &1107438331
 GameObject:
@@ -378,6 +378,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1505816566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: b8e142071daafd345acd53d77e27c5ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 1677297243}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1505816570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505816566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcd5f26e9cf05ed4bbc8e178981fa80b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1564812269 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: b8e142071daafd345acd53d77e27c5ea,
@@ -478,11 +496,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b8e142071daafd345acd53d77e27c5ea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 529
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b8e142071daafd345acd53d77e27c5ea, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 41
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b8e142071daafd345acd53d77e27c5ea, type: 3}
       propertyPath: m_LocalPosition.z
@@ -520,6 +538,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: b8e142071daafd345acd53d77e27c5ea, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: b8e142071daafd345acd53d77e27c5ea, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -371
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: b8e142071daafd345acd53d77e27c5ea, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -334
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8e142071daafd345acd53d77e27c5ea, type: 3}
 --- !u!1 &1681671356
@@ -556,7 +586,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -436, y: -16.1}
+  m_AnchoredPosition: {x: -390, y: 179}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1681671358
@@ -589,8 +619,8 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: State will go here
 --- !u!222 &1681671359

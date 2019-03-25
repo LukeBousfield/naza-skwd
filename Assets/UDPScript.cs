@@ -107,7 +107,8 @@ public class TotalState
         double x = (double)arr[rotStart + 1];
         double y = (double)arr[rotStart + 2];
         double z = (double)arr[rotStart + 3];
-        Quaternion rotation = new Quaternion((float)x, (float)y, (float)z, (float)w);
+        Quaternion rotation = new Quaternion((float)z, (float)y, (float)x, (float)w);
+        Debug.Log(rotation.w);
 
         SystemState state = new SystemState(rotation, pos);
 
@@ -132,6 +133,7 @@ public class UDPScript : MonoBehaviour
     private UdpClient Client;
     private IPEndPoint LocalEp;
     private Thread ReceiveThread;
+    private int LoopNum;
 
     // Start is called before the first frame update
     void Start()
@@ -175,6 +177,7 @@ public class UDPScript : MonoBehaviour
         Debug.Log("Actually run");
         while (Thread.CurrentThread.IsAlive)
         {
+            LoopNum++;
             Debug.Log("Running receive data");
             byte[] data = Client.Receive(ref LocalEp);
             ArrayList parsed = ParseBin(data);
@@ -183,7 +186,9 @@ public class UDPScript : MonoBehaviour
             Debug.Log(state.Describe());
             UnityThread.executeInUpdate(() =>
             {
-                StateText.GetComponent<Text>().text = state.Describe();
+                StateText.GetComponent<Text>().text = "Loop: " + LoopNum + "\n" + state.Describe();
+                SystemAdapter boosterSA = BoosterSystemGameObject.GetComponent<SystemAdapter>();
+                boosterSA.UpdateSystem(state.BoosterSystemState);
             });
         }
     }
