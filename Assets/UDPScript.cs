@@ -4,12 +4,130 @@ using UnityEngine;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using UnityEngine.UI;
+
+public static class QuaternionExtension
+{
+    public static string Describe(this Quaternion q)
+    {
+        return "w = " + q.w + ", x = " + q.x + ", y = " + q.y + ", z = " + q.z;
+    }
+}
+
+public struct CoordPosition
+{
+    public double Altitude, Latitude, Longitude;
+
+    public CoordPosition(double altitude, double latitude, double longitude)
+    {
+        this.Altitude = altitude;
+        this.Latitude = latitude;
+        this.Longitude = longitude;
+    }
+
+    public string Describe()
+    {
+        return "Altitude = " + Altitude + ", Latitude = " + Latitude + ", Longitude = " + Longitude;
+    }
+
+}
+
+public struct SystemState
+{
+
+    public Quaternion Rotation;
+    public CoordPosition Position;
+
+    public SystemState(Quaternion Rotation, CoordPosition Position)
+    {
+        this.Rotation = Rotation;
+        this.Position = Position;
+    }
+
+    public string Describe()
+    {
+        string str = "";
+        str += "    Position: " + Position.Describe();
+        str += "\n";
+        str += "    Rotation: " + Rotation.Describe();
+        str += "\n";
+        return str;
+    }
+
+}
+
+public class TotalState
+{
+
+    public SystemState CMSystemState;
+    public SystemState LASSystemState;
+    public SystemState BoosterSystemState;
+    public sbyte EngineFlag;
+    public sbyte Reserved;
+
+    public TotalState(ArrayList arr)
+    {
+        CMSystemState = GetSystemState(arr, 0);
+        LASSystemState = GetSystemState(arr, 1);
+        BoosterSystemState = GetSystemState(arr, 2);
+        EngineFlag = (sbyte)arr[arr.Count - 2];
+        Reserved = (sbyte)arr[arr.Count - 1];
+    }
+
+    public string Describe()
+    {
+        string str = "";
+        str += "CM System: ";
+        str += "\n";
+        str += CMSystemState.Describe();
+        str += "LAS System: ";
+        str += "\n";
+        str += LASSystemState.Describe();
+        str += "Booster System: ";
+        str += "\n";
+        str += BoosterSystemState.Describe();
+        str += "Engine flag: " + EngineFlag;
+        str += "\n";
+        str += "Reserved: " + Reserved;
+        return str;
+    }
+
+    private static SystemState GetSystemState(ArrayList arr, int index)
+    {
+
+        int posStart = index * 3;
+        double altitude = (double)arr[posStart];
+        double latitude = (double)arr[posStart + 1];
+        double longitude = (double)arr[posStart + 2];
+        CoordPosition pos = new CoordPosition(altitude, latitude, longitude);
+
+        int rotStart = 9 + 4 * index;
+
+        double w = (double)arr[rotStart];
+        double x = (double)arr[rotStart + 1];
+        double y = (double)arr[rotStart + 2];
+        double z = (double)arr[rotStart + 3];
+        Quaternion rotation = new Quaternion((float)x, (float)y, (float)z, (float)w);
+
+        SystemState state = new SystemState(rotation, pos);
+
+        return state;
+
+    }
+
+}
 
 public class UDPScript : MonoBehaviour
 {
 
     public int Port;
     public string MCAddress;
+
+    public GameObject CMSystemGameObject;
+    public GameObject LASSystemGameObject;
+    public GameObject BoosterSystemGameObject;
+
+    public GameObject StateText;
 
     private UdpClient Client;
     private IPEndPoint LocalEp;
@@ -42,6 +160,11 @@ public class UDPScript : MonoBehaviour
 
     }
 
+    private void Awake()
+    {
+        UnityThread.initUnityThread();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -55,7 +178,13 @@ public class UDPScript : MonoBehaviour
             Debug.Log("Running receive data");
             byte[] data = Client.Receive(ref LocalEp);
             ArrayList parsed = ParseBin(data);
-            PrintAL(parsed);
+            //PrintAL(parsed);
+            TotalState state = new TotalState(parsed);
+            Debug.Log(state.Describe());
+            UnityThread.executeInUpdate(() =>
+            {
+                StateText.GetComponent<Text>().text = state.Describe();
+            });
         }
     }
 
@@ -91,7 +220,7 @@ public class UDPScript : MonoBehaviour
                 numRuns++;
             }
         }
-        catch (System.Exception err) { }
+        catch (System.Exception) { }
         return values;
     }
 

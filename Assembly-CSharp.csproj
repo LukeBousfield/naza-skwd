@@ -60,7 +60,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\SystemAdapter.cs" />
     <Compile Include="Assets\UDPScript.cs" />
+    <Compile Include="Assets\UnityThread.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Luke Bousfield/Documents/NAZA SKWAD/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
