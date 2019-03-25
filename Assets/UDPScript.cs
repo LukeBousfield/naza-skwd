@@ -107,7 +107,7 @@ public class TotalState
         double x = (double)arr[rotStart + 1];
         double y = (double)arr[rotStart + 2];
         double z = (double)arr[rotStart + 3];
-        Quaternion rotation = new Quaternion((float)z, (float)y, (float)x, (float)w);
+        Quaternion rotation = new Quaternion((float)x, (float)y, (float)z, (float)w);
         Debug.Log(rotation.w);
 
         SystemState state = new SystemState(rotation, pos);
@@ -189,6 +189,11 @@ public class UDPScript : MonoBehaviour
                 StateText.GetComponent<Text>().text = "Loop: " + LoopNum + "\n" + state.Describe();
                 SystemAdapter boosterSA = BoosterSystemGameObject.GetComponent<SystemAdapter>();
                 boosterSA.UpdateSystem(state.BoosterSystemState);
+                SystemAdapter lasSA = LASSystemGameObject.GetComponent<SystemAdapter>();
+                lasSA.UpdateSystem(state.LASSystemState);
+                SystemAdapter cmSA = CMSystemGameObject.GetComponent<SystemAdapter>();
+                cmSA.UpdateSystem(state.CMSystemState);
+                Debug.Log(cmSA);
             });
         }
     }
