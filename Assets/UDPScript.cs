@@ -8,9 +8,27 @@ using UnityEngine.UI;
 
 public static class QuaternionExtension
 {
+    public static float GetRoll(this Quaternion q)
+    {
+        return Mathf.Atan2(2 * q.y * q.w - 2 * q.x * q.z, 1 - 2 * q.y * q.y - 2 * q.z * q.z) * 180f / Mathf.PI;
+    }
+
+    public static float GetPitch(this Quaternion q)
+    {
+        return Mathf.Atan2(2 * q.x * q.w - 2 * q.y * q.z, 1 - 2 * q.x * q.x - 2 * q.z * q.z) * 180f / Mathf.PI;
+    }
+
+    public static float GetYaw(this Quaternion q)
+    {
+        return Mathf.Asin(2 * q.x * q.y + 2 * q.z * q.w) * 180f / Mathf.PI;
+    }
+
     public static string Describe(this Quaternion q)
     {
-        return "w = " + q.w + ", x = " + q.x + ", y = " + q.y + ", z = " + q.z;
+        float roll = q.GetRoll();
+        float pitch = q.GetPitch();
+        float yaw = q.GetYaw();
+        return "Roll: " + roll + "°, Pitch: " + pitch + "°, Yaw: " + yaw + "°";
     }
 }
 
@@ -108,7 +126,6 @@ public class TotalState
         double y = (double)arr[rotStart + 2];
         double z = (double)arr[rotStart + 3];
         Quaternion rotation = new Quaternion((float)x, (float)y, (float)z, (float)w);
-        Debug.Log(rotation.w);
 
         SystemState state = new SystemState(rotation, pos);
 
