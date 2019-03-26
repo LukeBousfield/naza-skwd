@@ -8,7 +8,7 @@ public class SystemAdapter : MonoBehaviour
     public void UpdateSystem(SystemState s)
     {
         transform.position = new Vector3((float)s.Position.Longitude, (float)s.Position.Altitude / 10 - 2000f, (float)s.Position.Latitude);
-        GetComponent<Rigidbody>().rotation = s.Rotation * Quaternion.Euler(-90, 0, 0);
+        GetComponent<Rigidbody>().rotation = s.Rotation * Quaternion.Euler(-100.312f, 0, 0);
     }
 
     // Start is called before the first frame update
