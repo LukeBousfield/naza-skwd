@@ -10,25 +10,32 @@ public static class QuaternionExtension
 {
     public static float GetRoll(this Quaternion q)
     {
-        return Mathf.Atan2(2 * q.y * q.w - 2 * q.x * q.z, 1 - 2 * q.y * q.y - 2 * q.z * q.z) * 180f / Mathf.PI;
+        return q.x;// Mathf.Atan2(2 * q.y * q.w - 2 * q.x * q.z, 1 - 2 * q.y * q.y - 2 * q.z * q.z) * 180f / Mathf.PI;
     }
 
     public static float GetPitch(this Quaternion q)
     {
-        return Mathf.Atan2(2 * q.x * q.w - 2 * q.y * q.z, 1 - 2 * q.x * q.x - 2 * q.z * q.z) * 180f / Mathf.PI;
+        return q.y;// Mathf.Atan2(2 * q.x * q.w - 2 * q.y * q.z, 1 - 2 * q.x * q.x - 2 * q.z * q.z) * 180f / Mathf.PI;
     }
 
     public static float GetYaw(this Quaternion q)
     {
-        return Mathf.Asin(2 * q.x * q.y + 2 * q.z * q.w) * 180f / Mathf.PI;
+        return q.z;// Mathf.Asin(2 * q.x * q.y + 2 * q.z * q.w) * 180f / Mathf.PI;
     }
+
+    public static float GetLast(this Quaternion q)
+    {
+        return q.w;// Mathf.Asin(2 * q.x * q.y + 2 * q.z * q.w) * 180f / Mathf.PI;
+    }
+
 
     public static string Describe(this Quaternion q)
     {
         float roll = q.GetRoll();
         float pitch = q.GetPitch();
         float yaw = q.GetYaw();
-        return "Roll: " + roll + "°, Pitch: " + pitch + "°, Yaw: " + yaw + "°";
+        float Last = q.GetLast();
+        return "    X: " + roll + "    Y: " + pitch + "    Z: " + yaw + "    W: " + Last;
     }
 }
 
@@ -112,7 +119,6 @@ public class TotalState
 
     private static SystemState GetSystemState(ArrayList arr, int index)
     {
-
         int posStart = index * 3;
         double altitude = (double)arr[posStart];
         double latitude = (double)arr[posStart + 1];
@@ -125,14 +131,19 @@ public class TotalState
         double x = (double)arr[rotStart + 1];
         double y = (double)arr[rotStart + 2];
         double z = (double)arr[rotStart + 3];
+
+        float x1 = (float)System.Math.Atan2(2 * y * w - 2 * x * z, 1 - 2 * y * y - 2 * z * z);
+        float y1 = (float)System.Math.Atan2(2 * x * w - 2 * y * z, 1 - 2 * x * x - 2 * z * z);
+        float z1 = (float)System.Math.Asin(2 * x * y + 2 * z * w);
+
+        //Vector3 rotation = new Vector3(x1, y1, z1);
+
         Quaternion rotation = new Quaternion((float)x, (float)y, (float)z, (float)w);
 
         SystemState state = new SystemState(rotation, pos);
 
         return state;
-
     }
-
 }
 
 public class UDPScript : MonoBehaviour
