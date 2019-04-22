@@ -61,6 +61,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CameraFollow.cs" />
+    <Compile Include="Assets\CameraFollow1.cs" />
+    <Compile Include="Assets\gui\gauge.cs" />
+    <Compile Include="Assets\Sphere.cs" />
     <Compile Include="Assets\SystemAdapter.cs" />
     <Compile Include="Assets\UDPScript.cs" />
     <Compile Include="Assets\UnityThread.cs" />

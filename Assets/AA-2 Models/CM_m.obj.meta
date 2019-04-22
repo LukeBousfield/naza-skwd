@@ -4,104 +4,23 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Orion_Exterior_(1)_Body1_14
-    100004: Orion_Exterior_Body1_13
-    100006: Orion_Interior_(1)_Body1_1
-    100008: Orion_Interior_(10)_Body1_10
-    100010: Orion_Interior_(11)_Body1_11
-    100012: Orion_Interior_(12)_Body1_12
-    100014: Orion_Interior_(2)_Body1_2
-    100016: Orion_Interior_(3)_Body1_3
-    100018: Orion_Interior_(4)_Body1_4
-    100020: Orion_Interior_(5)_Body1_5
-    100022: Orion_Interior_(6)_Body1_6
-    100024: Orion_Interior_(7)_Body1_7
-    100026: Orion_Interior_(8)_Body1_8
-    100028: Orion_Interior_(9)_Body1_9
-    100030: Orion_Interior_Body1_0
+    100002: default
     400000: //RootNode
-    400002: Orion_Exterior_(1)_Body1_14
-    400004: Orion_Exterior_Body1_13
-    400006: Orion_Interior_(1)_Body1_1
-    400008: Orion_Interior_(10)_Body1_10
-    400010: Orion_Interior_(11)_Body1_11
-    400012: Orion_Interior_(12)_Body1_12
-    400014: Orion_Interior_(2)_Body1_2
-    400016: Orion_Interior_(3)_Body1_3
-    400018: Orion_Interior_(4)_Body1_4
-    400020: Orion_Interior_(5)_Body1_5
-    400022: Orion_Interior_(6)_Body1_6
-    400024: Orion_Interior_(7)_Body1_7
-    400026: Orion_Interior_(8)_Body1_8
-    400028: Orion_Interior_(9)_Body1_9
-    400030: Orion_Interior_Body1_0
-    2100000: Orion_Exterior_(1)_Body1_14Mat
-    2100002: Orion_Exterior_Body1_13Mat
-    2100004: Orion_Interior_(1)_Body1_1Mat
-    2100006: Orion_Interior_(10)_Body1_10Mat
-    2100008: Orion_Interior_(11)_Body1_11Mat
-    2100010: Orion_Interior_(12)_Body1_12Mat
-    2100012: Orion_Interior_(2)_Body1_2Mat
-    2100014: Orion_Interior_(3)_Body1_3Mat
-    2100016: Orion_Interior_(4)_Body1_4Mat
-    2100018: Orion_Interior_(5)_Body1_5Mat
-    2100020: Orion_Interior_(6)_Body1_6Mat
-    2100022: Orion_Interior_(7)_Body1_7Mat
-    2100024: Orion_Interior_(8)_Body1_8Mat
-    2100026: Orion_Interior_(9)_Body1_9Mat
-    2100028: Orion_Interior_Body1_0Mat
-    2300000: Orion_Exterior_(1)_Body1_14
-    2300002: Orion_Exterior_Body1_13
-    2300004: Orion_Interior_(1)_Body1_1
-    2300006: Orion_Interior_(10)_Body1_10
-    2300008: Orion_Interior_(11)_Body1_11
-    2300010: Orion_Interior_(12)_Body1_12
-    2300012: Orion_Interior_(2)_Body1_2
-    2300014: Orion_Interior_(3)_Body1_3
-    2300016: Orion_Interior_(4)_Body1_4
-    2300018: Orion_Interior_(5)_Body1_5
-    2300020: Orion_Interior_(6)_Body1_6
-    2300022: Orion_Interior_(7)_Body1_7
-    2300024: Orion_Interior_(8)_Body1_8
-    2300026: Orion_Interior_(9)_Body1_9
-    2300028: Orion_Interior_Body1_0
-    3300000: Orion_Exterior_(1)_Body1_14
-    3300002: Orion_Exterior_Body1_13
-    3300004: Orion_Interior_(1)_Body1_1
-    3300006: Orion_Interior_(10)_Body1_10
-    3300008: Orion_Interior_(11)_Body1_11
-    3300010: Orion_Interior_(12)_Body1_12
-    3300012: Orion_Interior_(2)_Body1_2
-    3300014: Orion_Interior_(3)_Body1_3
-    3300016: Orion_Interior_(4)_Body1_4
-    3300018: Orion_Interior_(5)_Body1_5
-    3300020: Orion_Interior_(6)_Body1_6
-    3300022: Orion_Interior_(7)_Body1_7
-    3300024: Orion_Interior_(8)_Body1_8
-    3300026: Orion_Interior_(9)_Body1_9
-    3300028: Orion_Interior_Body1_0
-    4300000: Orion_Exterior_(1)_Body1_14
-    4300002: Orion_Exterior_Body1_13
-    4300004: Orion_Interior_(1)_Body1_1
-    4300006: Orion_Interior_(10)_Body1_10
-    4300008: Orion_Interior_(11)_Body1_11
-    4300010: Orion_Interior_(12)_Body1_12
-    4300012: Orion_Interior_(2)_Body1_2
-    4300014: Orion_Interior_(3)_Body1_3
-    4300016: Orion_Interior_(4)_Body1_4
-    4300018: Orion_Interior_(5)_Body1_5
-    4300020: Orion_Interior_(6)_Body1_6
-    4300022: Orion_Interior_(7)_Body1_7
-    4300024: Orion_Interior_(8)_Body1_8
-    4300026: Orion_Interior_(9)_Body1_9
-    4300028: Orion_Interior_Body1_0
-    2186277476908879412: ImportLogs
-  externalObjects: {}
+    400002: default
+    2300000: default
+    3300000: default
+    4300000: default
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: defaultMat
+    second: {fileID: 2100000, guid: 44ff1a8c00817794d84e8fe7751084b3, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -131,10 +50,10 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
-    importVisibility: 1
+    importVisibility: 0
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -142,20 +61,20 @@ ModelImporter:
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
-    indexFormat: 0
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
     previousCalculatedGlobalScale: 1
     hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 2
+    tangentImportMode: 3
     normalCalculationMode: 0
-    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   importAnimation: 1

@@ -132,9 +132,9 @@ public class TotalState
         double y = (double)arr[rotStart + 2];
         double z = (double)arr[rotStart + 3];
 
-        float x1 = (float)System.Math.Atan2(2 * y * w - 2 * x * z, 1 - 2 * y * y - 2 * z * z);
-        float y1 = (float)System.Math.Atan2(2 * x * w - 2 * y * z, 1 - 2 * x * x - 2 * z * z);
-        float z1 = (float)System.Math.Asin(2 * x * y + 2 * z * w);
+        //float x1 = (float)System.Math.Atan2(2 * y * w - 2 * x * z, 1 - 2 * y * y - 2 * z * z);
+        //float y1 = (float)System.Math.Atan2(2 * x * w - 2 * y * z, 1 - 2 * x * x - 2 * z * z);
+        //float z1 = (float)System.Math.Asin(2 * x * y + 2 * z * w);
 
         //Vector3 rotation = new Vector3(x1, y1, z1);
 
