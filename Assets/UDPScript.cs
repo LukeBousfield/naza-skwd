@@ -10,32 +10,25 @@ public static class QuaternionExtension
 {
     public static float GetRoll(this Quaternion q)
     {
-        return q.x;// Mathf.Atan2(2 * q.y * q.w - 2 * q.x * q.z, 1 - 2 * q.y * q.y - 2 * q.z * q.z) * 180f / Mathf.PI;
+        return Mathf.Atan2(2 * q.y * q.w - 2 * q.x * q.z, 1 - 2 * q.y * q.y - 2 * q.z * q.z) * 180f / Mathf.PI; //q.x
     }
 
     public static float GetPitch(this Quaternion q)
     {
-        return q.y;// Mathf.Atan2(2 * q.x * q.w - 2 * q.y * q.z, 1 - 2 * q.x * q.x - 2 * q.z * q.z) * 180f / Mathf.PI;
+        return Mathf.Atan2(2 * q.x * q.w - 2 * q.y * q.z, 1 - 2 * q.x * q.x - 2 * q.z * q.z) * 180f / Mathf.PI; //q.y
     }
 
     public static float GetYaw(this Quaternion q)
     {
-        return q.z;// Mathf.Asin(2 * q.x * q.y + 2 * q.z * q.w) * 180f / Mathf.PI;
+        return Mathf.Asin(2 * q.x * q.y + 2 * q.z * q.w) * 180f / Mathf.PI; //q.z
     }
-
-    public static float GetLast(this Quaternion q)
-    {
-        return q.w;// Mathf.Asin(2 * q.x * q.y + 2 * q.z * q.w) * 180f / Mathf.PI;
-    }
-
 
     public static string Describe(this Quaternion q)
     {
         float roll = q.GetRoll();
         float pitch = q.GetPitch();
         float yaw = q.GetYaw();
-        float Last = q.GetLast();
-        return "    X: " + roll + "    Y: " + pitch + "    Z: " + yaw + "    W: " + Last;
+        return " Roll: " + roll + "    Pitch: " + pitch + "    Yaw: " + yaw;
     }
 }
 
@@ -52,7 +45,7 @@ public struct CoordPosition
 
     public string Describe()
     {
-        return "Altitude = " + Altitude + ", Latitude = " + Latitude + ", Longitude = " + Longitude;
+        return " Altitude: " + Altitude + "    Latitude: " + Latitude + "    Longitude: " + Longitude;
     }
 
 }
@@ -123,6 +116,14 @@ public class TotalState
         double altitude = (double)arr[posStart];
         double latitude = (double)arr[posStart + 1];
         double longitude = (double)arr[posStart + 2];
+        if (index == 1)
+        {
+            longitude = longitude - .0000006;
+        }
+        if (index == 2)
+        {
+            longitude = longitude - .0000008;
+        }
         CoordPosition pos = new CoordPosition(altitude, latitude, longitude);
 
         int rotStart = 9 + 4 * index;
@@ -206,12 +207,12 @@ public class UDPScript : MonoBehaviour
         while (Thread.CurrentThread.IsAlive)
         {
             LoopNum++;
-            Debug.Log("Running receive data");
+            //Debug.Log("Running receive data");
             byte[] data = Client.Receive(ref LocalEp);
             ArrayList parsed = ParseBin(data);
             //PrintAL(parsed);
             TotalState state = new TotalState(parsed);
-            Debug.Log(state.Describe());
+            //Debug.Log(state.Describe());
             UnityThread.executeInUpdate(() =>
             {
                 StateText.GetComponent<Text>().text = "Loop: " + LoopNum + "\n" + state.Describe();
@@ -221,7 +222,7 @@ public class UDPScript : MonoBehaviour
                 lasSA.UpdateSystem(state.LASSystemState);
                 SystemAdapter cmSA = CMSystemGameObject.GetComponent<SystemAdapter>();
                 cmSA.UpdateSystem(state.CMSystemState);
-                Debug.Log(cmSA);
+                //Debug.Log(cmSA);
             });
         }
     }

@@ -7,17 +7,19 @@ public class gauge : MonoBehaviour {
 
 	public Text txt;
 	public string gaugeName = "VELOCITY";
-	public string units = "m/s";
+	public string units = " ft/s";
 	public GameObject circle;
 	public float minValue, maxValue;
 	public float value;
+    float refV = 0.0f;
 
 
-	void Start () {
+    void Start () {
 	}
 
 	void Update () {
-		circle.GetComponent<Image>().fillAmount= (value/(maxValue - minValue));
+        float newPosition = Mathf.SmoothDamp(circle.GetComponent<Image>().fillAmount, (value / (maxValue - minValue)), ref refV, .3f);
+        circle.GetComponent<Image>().fillAmount = newPosition;
 		txt.text = (gaugeName + '\n' + value + units);
 	}
 }
