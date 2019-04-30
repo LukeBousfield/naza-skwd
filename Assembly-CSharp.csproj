@@ -60,8 +60,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\atmosphere.cs" />
     <Compile Include="Assets\CameraFollow.cs" />
     <Compile Include="Assets\CameraFollow1.cs" />
+    <Compile Include="Assets\camSwitch.cs" />
     <Compile Include="Assets\gui\gauge.cs" />
     <Compile Include="Assets\Sphere.cs" />
     <Compile Include="Assets\SystemAdapter.cs" />

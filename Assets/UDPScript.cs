@@ -216,13 +216,13 @@ public class UDPScript : MonoBehaviour
             UnityThread.executeInUpdate(() =>
             {
                 StateText.GetComponent<Text>().text = "Loop: " + LoopNum + "\n" + state.Describe();
-                SystemAdapter boosterSA = BoosterSystemGameObject.GetComponent<SystemAdapter>();
-                boosterSA.UpdateSystem(state.BoosterSystemState);
-                SystemAdapter lasSA = LASSystemGameObject.GetComponent<SystemAdapter>();
-                lasSA.UpdateSystem(state.LASSystemState);
                 SystemAdapter cmSA = CMSystemGameObject.GetComponent<SystemAdapter>();
                 cmSA.UpdateSystem(state.CMSystemState);
-                //Debug.Log(cmSA);
+                SystemAdapter lasSA = LASSystemGameObject.GetComponent<SystemAdapter>();
+                lasSA.UpdateSystem(state.LASSystemState);
+                SystemAdapter boosterSA = BoosterSystemGameObject.GetComponent<SystemAdapter>();
+                boosterSA.UpdateSystem(state.BoosterSystemState);
+                //Debug.Log(cmSA);ngin
             });
         }
     }
