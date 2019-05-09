@@ -124,6 +124,7 @@ public class TotalState
         {
             longitude = longitude - .0000008;
         }
+
         CoordPosition pos = new CoordPosition(altitude, latitude, longitude);
 
         int rotStart = 9 + 4 * index;
@@ -139,7 +140,8 @@ public class TotalState
 
         //Vector3 rotation = new Vector3(x1, y1, z1);
 
-        Quaternion rotation = new Quaternion((float)x, (float)y, (float)z, (float)w);
+        Quaternion rotation1 = new Quaternion((float)x, (float)y, (float)z, (float)w);
+        Quaternion rotation = rotation1 * Quaternion.Euler(-101.6f, 0.9f, -.9f);
 
         SystemState state = new SystemState(rotation, pos);
 
@@ -152,12 +154,17 @@ public class UDPScript : MonoBehaviour
 
     public int Port;
     public string MCAddress;
+    public float DataPointWaitTime;
 
     public GameObject CMSystemGameObject;
     public GameObject LASSystemGameObject;
     public GameObject BoosterSystemGameObject;
-
+    public GameObject particleBooster, particleCM, particleLAS;
     public GameObject StateText;
+    public GameObject EngineFlagText;
+    public GameObject DisplayAfterText;
+    public GameObject displayEngine;
+    public GameObject displayEngine2;
 
     private UdpClient Client;
     private IPEndPoint LocalEp;
@@ -199,11 +206,17 @@ public class UDPScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
     }
+
+    //public GameObject DisplayAfterText;
 
     void ReceiveData()
     {
         Debug.Log("Actually run");
+        int b1 = 0;
+        int b2 = 0;
+        int b3 = 0;
         while (Thread.CurrentThread.IsAlive)
         {
             LoopNum++;
@@ -222,9 +235,43 @@ public class UDPScript : MonoBehaviour
                 lasSA.UpdateSystem(state.LASSystemState);
                 SystemAdapter boosterSA = BoosterSystemGameObject.GetComponent<SystemAdapter>();
                 boosterSA.UpdateSystem(state.BoosterSystemState);
+                //Debug.Log(state.EngineFlag);
+                Debug.Log(state.EngineFlag);
+
+                if (state.EngineFlag == 1 && particleBooster != null) particleBooster.SetActive(true);
+                else if(particleBooster != null)particleBooster.SetActive(false);
+                if (state.EngineFlag == 3 && particleCM != null) particleCM.SetActive(true);
+                else if (particleCM != null) particleCM.SetActive(false);
+                if (state.EngineFlag == 2 && particleLAS != null) particleLAS.SetActive(true);
+                else if (particleLAS != null) particleLAS.SetActive(false);
+
+
+                if (state.EngineFlag  == 3 && b1 != 1)
+                {
+                    
+                    //Do Steam
+                    b1 = 1;
+                    b3 = 1;
+                    if (displayEngine != null)
+                    {
+                        int timeBreak1 = (int)System.Math.Round(LoopNum * .025);
+                        displayEngine.GetComponent<Text>().text = "Break at " + timeBreak1 + "s";
+                    }
+                }
+                if(state.EngineFlag == 0 && b2 != 1 && b3 ==1)
+                {
+                    //Do fire
+                    b2 = 1;
+                    if (displayEngine2 != null)
+                    {
+                        int timeBreak2 = (int)System.Math.Round(LoopNum * .025);
+                        displayEngine2.GetComponent<Text>().text = "Break at " + timeBreak2 + "s";
+                    }
+                }
                 //Debug.Log(cmSA);ngin
             });
         }
+        //Print both max values
     }
 
     private void OnApplicationQuit()
